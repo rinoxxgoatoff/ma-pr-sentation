@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Phase 1 - Démarrage</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f1520;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f1520;
+            background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M40 40V0H0v40h40zM1 1h38v38H1V1z" stroke="%23FFFFFF" stroke-opacity="0.03" stroke-width="1"/></g></svg>');
+        }
+
+        .accent-text-green { color: #00d084; }
+        .accent-text-blue { color: #0099ff; }
+        .accent-text-orange { color: #ff6b6b; }
+        .text-muted { color: #64748b; }
+        
+        /* Component Boxes */
+        .component-box {
+            fill: #1e293b;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .component-box.active-green {
+            stroke: #00d084;
+            filter: drop-shadow(0 0 8px rgba(0, 208, 132, 0.4));
+        }
+
+        .component-box.inactive {
+            stroke: #475569;
+            fill: #0f172a;
+            opacity: 0.6;
+        }
+        
+        .component-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-anchor: middle;
+        }
+
+        .component-text.active { fill: #ffffff; }
+        .component-text.inactive { fill: #64748b; }
+        
+        /* Flow Animation */
+        .energy-flow {
+            stroke-dasharray: 10;
+            animation: flowAnimation 1.5s linear infinite;
+        }
+
+        @keyframes flowAnimation {
+            from { stroke-dashoffset: 20; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .info-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            backdrop-filter: blur(5px);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 208, 132, 0.1);
+            color: #00d084;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container p-12">
+<!-- Header -->
+<div class="flex justify-between items-center mb-2 z-10 relative">
+<div>
+<div class="flex items-center mb-1">
+<span class="bg-green-900 text-green-200 px-3 py-1 rounded text-xs font-bold tracking-wider uppercase mr-3">Phase 1</span>
+<h2 class="text-3xl font-bold tracking-tight">Démarrage <span class="text-gray-500">&amp; Faible Vitesse</span></h2>
+</div>
+<p class="text-gray-400 text-sm ml-1 flex items-center"><i class="fas fa-bolt mr-2 text-yellow-400"></i> Mode 100% Électrique (EV)</p>
+</div>
+<div class="text-right">
+<p class="text-4xl font-bold text-gray-700 opacity-30">03</p>
+</div>
+</div>
+<!-- Main Layout -->
+<div class="flex flex-1 gap-8 mt-4">
+<!-- Left Panel: Context & Benefits -->
+<div class="w-1/3 flex flex-col justify-between">
+<!-- Context Card -->
+<div class="info-card p-6 rounded-xl mb-4">
+<h3 class="text-lg font-bold text-white mb-3 border-b border-gray-700 pb-2">Contexte d'utilisation</h3>
+<p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                        Le véhicule démarre en silence. À basse vitesse (généralement entre 0 et 30 km/h), seul le moteur électrique propulse la voiture. Idéal pour les manœuvres de stationnement et la conduite en zone résidentielle.
+                    </p>
+<div class="flex items-center text-xs text-gray-400 bg-gray-800 p-2 rounded">
+<i class="fas fa-info-circle mr-2"></i>
+<span>Le moteur thermique reste éteint tant que la batterie est suffisamment chargée et l'accélération douce.</span>
+</div>
+</div>
+<!-- Benefits List -->
+<div class="info-card p-6 rounded-xl flex-1">
+<h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2">Bénéfices clés</h3>
+<div class="flex items-center mb-4">
+<div class="benefit-icon"><i class="fas fa-wind"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Zéro Émission</h4>
+<p class="text-xs text-gray-400">Aucun gaz d'échappement (CO₂)</p>
+</div>
+</div>
+<div class="flex items-center mb-4">
+<div class="benefit-icon"><i class="fas fa-volume-mute"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Silence Absolu</h4>
+<p class="text-xs text-gray-400">Confort acoustique maximal</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="benefit-icon"><i class="fas fa-tachometer-alt"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Couple Immédiat</h4>
+<p class="text-xs text-gray-400">Réactivité instantanée au démarrage</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: SVG Visualization -->
+<div class="w-2/3 info-card rounded-xl relative flex items-center justify-center p-4">
+<div class="absolute top-4 left-4 bg-gray-900 px-3 py-1 rounded text-xs font-mono text-green-400 border border-green-900">
+                    STATUS: EV MODE
+                </div>
+<svg height="450" viewbox="0 0 800 450" width="800" xmlns="http://www.w3.org/2000/svg">
+<!-- Connecting Lines (Background) -->
+<!-- Mechanical Link: ICE -> Transmission (Inactive) -->
+<path d="M 220,250 L 350,250" stroke="#334155" stroke-width="3"></path>
+<!-- Mechanical Link: Electric Motor -> Transmission (Active) -->
+<path d="M 500,250 L 350,250" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 500,250 L 350,250" fill="none" stroke="#00d084" stroke-width="4"></path>
+<!-- Mechanical Link: Transmission -> Wheels (Active) -->
+<path d="M 350,290 L 350,380" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 350,290 L 350,380" fill="none" stroke="#00d084" stroke-width="4"></path>
+<!-- Electrical Link: Battery -> Inverter (Active) -->
+<path d="M 650,320 L 650,150 L 550,150" fill="none" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 650,320 L 650,150 L 550,150" fill="none" stroke="#00d084" stroke-width="4"></path>
+<!-- Electrical Link: Inverter -> Electric Motor (Active) -->
+<path d="M 500,190 L 500,210" fill="none" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 500,190 L 500,210" fill="none" stroke="#00d084" stroke-width="4"></path>
+<!-- Components -->
+<!-- ICE (Left) - Inactive -->
+<g transform="translate(120, 210)">
+<rect class="component-box inactive" height="80" rx="8" width="100" x="0" y="0"></rect>
+<text class="component-text inactive" x="50" y="35">Moteur</text>
+<text class="component-text inactive" x="50" y="55">Thermique</text>
+<text class="component-text" fill="#ef4444" style="font-size: 10px; font-weight: bold;" x="50" y="75">OFF</text>
+</g>
+<!-- Transmission (Center) - Active Mechanical -->
+<g transform="translate(300, 210)">
+<circle class="component-box active-green" cx="50" cy="40" fill="#1e293b" r="40" stroke-width="2"></circle>
+<text class="component-text active" x="50" y="45">Trans.</text>
+<!-- Rotation indicator -->
+<path d="M 30,20 Q 50,5 70,20" fill="none" stroke="#00d084" stroke-width="2"></path>
+<path d="M 65,18 L 70,20 L 66,24" fill="#00d084"></path>
+</g>
+<!-- Electric Motor (Right) - Active Source -->
+<g transform="translate(450, 210)">
+<rect class="component-box active-green" height="80" rx="8" width="100" x="0" y="0"></rect>
+<text class="component-text active" x="50" y="35">Moteur</text>
+<text class="component-text active" x="50" y="55">Électrique</text>
+<circle cx="85" cy="15" fill="#00d084" r="5"></circle> <!-- Active light -->
+</g>
+<!-- Inverter (Top Right) - Active -->
+<g transform="translate(450, 110)">
+<rect class="component-box active-green" height="60" rx="5" width="100" x="0" y="0"></rect>
+<text class="component-text active" x="50" y="35">Inverter</text>
+</g>
+<!-- Battery (Bottom Right) - Active Source -->
+<g transform="translate(580, 320)">
+<rect class="component-box active-green" height="60" rx="5" width="140" x="0" y="0"></rect>
+<rect fill="#00d084" height="40" rx="2" width="10" x="140" y="10"></rect>
+<text class="component-text active" x="70" y="35">Batterie HV</text>
+<!-- Discharge Arrow -->
+<path d="M 120,20 L 120,40 M 110,30 L 130,30" stroke="#00d084" stroke-width="2"></path>
+</g>
+<!-- Wheels (Bottom Center) - Active -->
+<g transform="translate(300, 380)">
+<rect class="component-box" fill="#1e293b" height="20" rx="5" stroke="#475569" width="100" x="0" y="0"></rect>
+<circle cx="20" cy="35" fill="#1e293b" r="25" stroke="#00d084" stroke-dasharray="4,4" stroke-width="3"></circle> <!-- Rotating Wheel -->
+<circle cx="80" cy="35" fill="#1e293b" r="25" stroke="#00d084" stroke-dasharray="4,4" stroke-width="3"></circle> <!-- Rotating Wheel -->
+<path d="M 50,0 L 50,35 M 20,35 L 80,35" fill="none" stroke="#475569" stroke-width="6"></path>
+<!-- Motion Lines -->
+<path d="M 5,35 L -15,35" stroke="#00d084" stroke-opacity="0.6" stroke-width="2"></path>
+<path d="M 5,45 L -10,45" stroke="#00d084" stroke-opacity="0.6" stroke-width="2"></path>
+</g>
+</svg>
+<!-- Legend Overlay -->
+<div class="absolute bottom-4 left-4 bg-gray-900 bg-opacity-90 p-3 rounded border border-gray-700">
+<div class="flex items-center mb-1">
+<div class="w-6 h-1 bg-green-500 mr-2 rounded"></div>
+<p class="text-xs text-gray-300">Flux Électrique (Traction)</p>
+</div>
+<div class="flex items-center">
+<div class="w-3 h-3 bg-gray-700 border border-gray-500 mr-2 rounded"></div>
+<p class="text-xs text-gray-500">Composant Inactif</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
