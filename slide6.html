@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Phase 4 - Vitesse de croisière</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f1520;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f1520;
+            background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M40 40V0H0v40h40zM1 1h38v38H1V1z" stroke="%23FFFFFF" stroke-opacity="0.03" stroke-width="1"/></g></svg>');
+        }
+
+        .accent-text-green { color: #00d084; }
+        .accent-text-blue { color: #0099ff; }
+        .accent-text-orange { color: #ff6b6b; }
+        .text-muted { color: #64748b; }
+        
+        /* Component Boxes */
+        .component-box {
+            fill: #1e293b;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+        }
+
+        .component-box.active-green {
+            stroke: #00d084;
+            filter: drop-shadow(0 0 8px rgba(0, 208, 132, 0.4));
+        }
+
+        .component-box.active-orange {
+            stroke: #ff6b6b;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 107, 0.4));
+        }
+
+        .component-box.inactive {
+            stroke: #475569;
+            fill: #0f172a;
+            opacity: 0.6;
+        }
+        
+        .component-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-anchor: middle;
+        }
+
+        .component-text.active { fill: #ffffff; }
+        .component-text.inactive { fill: #64748b; }
+        
+        /* Flow Animation */
+        .energy-flow {
+            stroke-dasharray: 10;
+            animation: flowAnimation 1.5s linear infinite;
+        }
+        
+        .energy-flow-slow {
+            stroke-dasharray: 10;
+            animation: flowAnimation 2.5s linear infinite;
+        }
+
+        @keyframes flowAnimation {
+            from { stroke-dashoffset: 20; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        .info-card {
+            background-color: rgba(30, 41, 59, 0.5);
+            border: 1px solid #334155;
+            backdrop-filter: blur(5px);
+        }
+
+        .benefit-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        
+        .icon-orange {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+        }
+        
+        .icon-green {
+            background-color: rgba(0, 208, 132, 0.1);
+            color: #00d084;
+        }
+
+        /* Speedometer CSS */
+        .speedometer-bg { fill: none; stroke: #334155; stroke-width: 6; }
+        .speedometer-fill { fill: none; stroke: #ff6b6b; stroke-width: 6; stroke-dasharray: 100, 200; }
+        .speedometer-needle { fill: #ff6b6b; transform-origin: 50% 50%; transform: rotate(45deg); }
+    </style>
+</head>
+<body>
+<div class="slide-container p-12">
+<!-- Header -->
+<div class="flex justify-between items-center mb-2 z-10 relative">
+<div>
+<div class="flex items-center mb-1">
+<span class="bg-indigo-900 text-indigo-200 px-3 py-1 rounded text-xs font-bold tracking-wider uppercase mr-3">Phase 4</span>
+<h2 class="text-3xl font-bold tracking-tight">Vitesse de Croisière <span class="text-gray-500">&amp; Recharge</span></h2>
+</div>
+<p class="text-gray-400 text-sm ml-1 flex items-center">
+<i class="fas fa-fire mr-2 text-red-400"></i> Moteur Thermique Principal 
+                    <span class="mx-2">+</span>
+<i class="fas fa-battery-half mr-2 text-green-400"></i> Recharge Opportuniste
+                </p>
+</div>
+<div class="text-right">
+<p class="text-4xl font-bold text-gray-700 opacity-30">06</p>
+</div>
+</div>
+<!-- Main Layout -->
+<div class="flex flex-1 gap-8 mt-4">
+<!-- Left Panel: Context & Benefits -->
+<div class="w-1/3 flex flex-col justify-between">
+<!-- Context Card -->
+<div class="info-card p-6 rounded-xl mb-4">
+<h3 class="text-lg font-bold text-white mb-3 border-b border-gray-700 pb-2">Contexte d'utilisation</h3>
+<p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                        Sur autoroute ou voie rapide (90-130 km/h), le moteur thermique fonctionne à son régime de rendement optimal. Il assure la propulsion tout en rechargeant la batterie avec l'excédent de puissance.
+                    </p>
+<div class="flex items-center text-xs text-gray-400 bg-gray-800 p-2 rounded">
+<i class="fas fa-cogs mr-2 text-orange-400"></i>
+<span>Le système optimise la charge moteur pour minimiser la consommation spécifique.</span>
+</div>
+</div>
+<!-- Benefits List -->
+<div class="info-card p-6 rounded-xl flex-1">
+<h3 class="text-lg font-bold text-white mb-4 border-b border-gray-700 pb-2">Bénéfices clés</h3>
+<div class="flex items-center mb-4">
+<div class="benefit-icon icon-orange"><i class="fas fa-chart-line"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Efficacité Thermique</h4>
+<p class="text-xs text-gray-400">Rendement maximal sur longue distance</p>
+</div>
+</div>
+<div class="flex items-center mb-4">
+<div class="benefit-icon icon-green"><i class="fas fa-charging-station"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Recharge en Roulant</h4>
+<p class="text-xs text-gray-400">Prépare la batterie pour la ville</p>
+</div>
+</div>
+<div class="flex items-center">
+<div class="benefit-icon icon-orange"><i class="fas fa-road"></i></div>
+<div>
+<h4 class="font-bold text-sm text-white">Autonomie Étendue</h4>
+<p class="text-xs text-gray-400">Idéal pour les longs trajets</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel: SVG Visualization -->
+<div class="w-2/3 info-card rounded-xl relative flex items-center justify-center p-4">
+<div class="absolute top-4 left-4 flex gap-2">
+<div class="bg-gray-900 px-3 py-1 rounded text-xs font-mono text-orange-400 border border-orange-900">
+                        ICE: OPTIMAL
+                    </div>
+<div class="bg-gray-900 px-3 py-1 rounded text-xs font-mono text-green-400 border border-green-900">
+                        CHARGING
+                    </div>
+</div>
+<!-- Speedometer Indicator -->
+<div class="absolute top-4 right-4 bg-gray-900 p-2 rounded-lg border border-gray-700 w-24 text-center">
+<svg height="30" viewbox="0 0 100 50" width="60">
+<path class="speedometer-bg" d="M 10,50 A 40,40 0 0 1 90,50"></path>
+<path class="speedometer-fill" d="M 10,50 A 40,40 0 0 1 75,20"></path> <!-- 110km/h approx -->
+</svg>
+<div class="text-xs font-bold text-white mt-1">110 km/h</div>
+</div>
+<svg height="450" viewbox="0 0 800 450" width="800" xmlns="http://www.w3.org/2000/svg">
+<!-- Connecting Lines (Background) -->
+<!-- FLUX PRINCIPAL: ICE -> Transmission -> Wheels (ORANGE) -->
+<path d="M 220,250 L 350,250" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 220,250 L 350,250" fill="none" stroke="#ff6b6b" stroke-width="4"></path>
+<path d="M 350,250 L 350,290" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 350,250 L 350,290" fill="none" stroke="#ff6b6b" stroke-width="4"></path>
+<path d="M 350,290 L 350,380" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow" d="M 350,290 L 350,380" fill="none" stroke="#ff6b6b" stroke-width="4"></path>
+<!-- FLUX SECONDAIRE: Transmission -> Generator -> Inverter -> Battery (GREEN) -->
+<!-- Trans -> Electric Motor (Generator mode) -->
+<path d="M 350,250 L 500,250" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow-slow" d="M 350,250 L 500,250" fill="none" stroke="#00d084" stroke-dasharray="5,5" stroke-width="3"></path>
+<!-- Motor -> Inverter -->
+<path d="M 500,210 L 500,190" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow-slow" d="M 500,210 L 500,190" fill="none" stroke="#00d084" stroke-dasharray="5,5" stroke-width="3"></path>
+<!-- Inverter -> Battery -->
+<path d="M 550,150 L 650,150 L 650,320" fill="none" stroke="#334155" stroke-width="3"></path>
+<path class="energy-flow-slow" d="M 550,150 L 650,150 L 650,320" fill="none" stroke="#00d084" stroke-dasharray="5,5" stroke-width="3"></path>
+<!-- Components -->
+<!-- ICE (Left) - Active Source -->
+<g transform="translate(120, 210)">
+<rect class="component-box active-orange" height="80" rx="8" width="100" x="0" y="0"></rect>
+<text class="component-text active" x="50" y="35">Moteur</text>
+<text class="component-text active" x="50" y="55">Thermique</text>
+<circle cx="85" cy="15" fill="#ff6b6b" r="5">
+<animate attributename="opacity" dur="1s" repeatcount="indefinite" values="1;0.5;1"></animate>
+</circle>
+</g>
+<!-- Transmission (Center) - Active -->
+<g transform="translate(300, 210)">
+<circle class="component-box active-orange" cx="50" cy="40" fill="#1e293b" r="40" stroke-width="2"></circle>
+<text class="component-text active" x="50" y="45">Trans.</text>
+<!-- Rotation indicator -->
+<path d="M 30,20 Q 50,5 70,20" fill="none" stroke="#ff6b6b" stroke-width="2"></path>
+<path d="M 65,18 L 70,20 L 66,24" fill="#ff6b6b"></path>
+</g>
+<!-- Electric Motor (Right) - Generator Mode -->
+<g transform="translate(450, 210)">
+<rect class="component-box active-green" height="80" rx="8" width="100" x="0" y="0"></rect>
+<text class="component-text active" x="50" y="35">Moteur</text>
+<text class="component-text active" x="50" y="55">Électrique</text>
+<text fill="#00d084" style="font-size: 9px; font-weight: bold;" x="50" y="72">(GÉNÉRATEUR)</text>
+</g>
+<!-- Inverter (Top Right) - Active -->
+<g transform="translate(450, 110)">
+<rect class="component-box active-green" height="60" rx="5" width="100" x="0" y="0"></rect>
+<text class="component-text active" x="50" y="35">Inverter</text>
+</g>
+<!-- Battery (Bottom Right) - Charging -->
+<g transform="translate(580, 320)">
+<rect class="component-box active-green" height="60" rx="5" width="140" x="0" y="0"></rect>
+<rect fill="#00d084" height="40" rx="2" width="10" x="140" y="10"></rect>
+<text class="component-text active" x="70" y="35">Batterie HV</text>
+<!-- Charging Animation Icon -->
+<path d="M 120,20 L 120,40 M 110,30 L 130,30" stroke="#00d084" stroke-width="2"></path>
+<animate attributename="opacity" dur="2s" repeatcount="indefinite" values="0.6;1;0.6"></animate>
+</g>
+<!-- Wheels (Bottom Center) - Fast Rotation -->
+<g transform="translate(300, 380)">
+<rect class="component-box" fill="#1e293b" height="20" rx="5" stroke="#475569" width="100" x="0" y="0"></rect>
+<circle cx="20" cy="35" fill="#1e293b" r="25" stroke="#ff6b6b" stroke-dasharray="4,4" stroke-width="3">
+<animatetransform attributename="transform" dur="0.5s" from="0 20 35" repeatcount="indefinite" to="360 20 35" type="rotate"></animatetransform>
+</circle>
+<circle cx="80" cy="35" fill="#1e293b" r="25" stroke="#ff6b6b" stroke-dasharray="4,4" stroke-width="3">
+<animatetransform attributename="transform" dur="0.5s" from="0 80 35" repeatcount="indefinite" to="360 80 35" type="rotate"></animatetransform>
+</circle>
+<path d="M 50,0 L 50,35 M 20,35 L 80,35" fill="none" stroke="#475569" stroke-width="6"></path>
+<!-- Motion Lines - Fast -->
+<path d="M 0,35 L -30,35" stroke="#ff6b6b" stroke-opacity="0.6" stroke-width="2"></path>
+<path d="M 0,45 L -20,45" stroke="#ff6b6b" stroke-opacity="0.6" stroke-width="2"></path>
+<path d="M 0,25 L -25,25" stroke="#ff6b6b" stroke-opacity="0.6" stroke-width="2"></path>
+</g>
+</svg>
+<!-- Legend Overlay -->
+<div class="absolute bottom-4 left-4 bg-gray-900 bg-opacity-90 p-3 rounded border border-gray-700">
+<div class="flex items-center mb-1">
+<div class="w-6 h-1 bg-red-500 mr-2 rounded"></div>
+<p class="text-xs text-gray-300">Flux Thermique (Traction)</p>
+</div>
+<div class="flex items-center">
+<div class="w-6 h-1 bg-green-500 mr-2 rounded border border-green-500 border-dashed"></div>
+<p class="text-xs text-gray-300">Flux Recharge (Batterie)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
