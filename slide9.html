@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bilan Environnemental et Économique</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f1520;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-color: #0f1520;
+            /* Tech background pattern - using solid colors instead of gradients for export compatibility */
+            background-color: #0f1520;
+        }
+        
+        /* Simulating grid with borders instead of gradient */
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M40 40V0H0v40h40zM1 1h38v38H1V1z" stroke="%23FFFFFF" stroke-opacity="0.03" stroke-width="1"/></g></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .accent-text-green { color: #00d084; }
+        .accent-text-blue { color: #0099ff; }
+        .accent-text-orange { color: #ff6b6b; }
+        .accent-bg-green { background-color: #00d084; }
+        .accent-bg-blue { background-color: #0099ff; }
+        
+        .info-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 280px;
+            width: 100%;
+        }
+
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-left: 4px solid;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+        .benefit-green { border-color: #00d084; }
+        .benefit-blue { border-color: #0099ff; }
+        .benefit-orange { border-color: #ff6b6b; }
+
+        .benefit-green .icon-circle { background-color: rgba(0, 208, 132, 0.15); color: #00d084; }
+        .benefit-blue .icon-circle { background-color: rgba(0, 153, 255, 0.15); color: #0099ff; }
+        .benefit-orange .icon-circle { background-color: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+
+    </style>
+</head>
+<body>
+<div class="slide-container p-12">
+<div class="grid-overlay"></div>
+<!-- Header -->
+<div class="flex justify-between items-center mb-8 z-10 relative">
+<div>
+<div class="flex items-center mb-1">
+<span class="bg-blue-900 text-blue-200 px-3 py-1 rounded text-xs font-bold tracking-wider uppercase mr-3">Analyse Comparative</span>
+<h2 class="text-3xl font-bold tracking-tight">Bilan <span class="accent-text-green">Environnemental</span> &amp; <span class="accent-text-blue">Économique</span></h2>
+</div>
+<p class="text-gray-400 text-sm ml-1">Comparaison des performances entre véhicule thermique classique et hybride</p>
+</div>
+<div class="text-right">
+<p class="text-4xl font-bold text-gray-700 opacity-30">09</p>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="flex gap-8 relative z-10 h-full">
+<!-- Left Column: Key Stats & Benefits -->
+<div class="w-1/3 flex flex-col gap-6">
+<!-- Stat Card 1 -->
+<div class="info-card p-6 flex items-center justify-between border-l-4 border-green-500">
+<div>
+<p class="text-sm text-gray-400 uppercase tracking-wide font-semibold mb-1">Réduction CO₂</p>
+<p class="stat-value accent-text-green">-30%</p>
+<p class="text-xs text-gray-500 mt-1">en cycle urbain moyen</p>
+</div>
+<i class="fas fa-leaf text-4xl text-green-500 opacity-20"></i>
+</div>
+<!-- Stat Card 2 -->
+<div class="info-card p-6 flex items-center justify-between border-l-4 border-blue-500">
+<div>
+<p class="text-sm text-gray-400 uppercase tracking-wide font-semibold mb-1">Économie Carburant</p>
+<p class="stat-value accent-text-blue">4.5 L</p>
+<p class="text-xs text-gray-500 mt-1">/100km vs 7.0 L (Thermique)</p>
+</div>
+<i class="fas fa-gas-pump text-4xl text-blue-500 opacity-20"></i>
+</div>
+<!-- Benefits Grid -->
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="benefit-card benefit-green rounded-lg">
+<div class="icon-circle">
+<i class="fas fa-recycle"></i>
+</div>
+<h4 class="font-bold text-white mb-1">Freinage</h4>
+<p class="text-xs text-gray-400 leading-snug">Moins d'usure des plaquettes grâce à la régénération</p>
+</div>
+<div class="benefit-card benefit-orange rounded-lg">
+<div class="icon-circle">
+<i class="fas fa-wallet"></i>
+</div>
+<h4 class="font-bold text-white mb-1">Coût</h4>
+<p class="text-xs text-gray-400 leading-snug">TCO (Total Cost of Ownership) réduit sur le long terme</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Charts -->
+<div class="w-2/3 flex flex-col gap-6">
+<!-- Consumption Chart -->
+<div class="info-card p-6 flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-bold text-lg text-white">Consommation Moyenne (L/100km)</h3>
+<div class="flex gap-4 text-xs">
+<div class="flex items-center"><span class="w-3 h-3 rounded-full bg-red-500 mr-2 opacity-80"></span>Thermique (Essence)</div>
+<div class="flex items-center"><span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>Hybride (HEV)</div>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="consumptionChart"></canvas>
+</div>
+<p class="text-xs text-gray-500 mt-4 text-center italic">*Données estimatives pour un véhicule compact standard. L'économie est maximale en ville.</p>
+</div>
+<!-- Efficiency Chart (Donut) & Context -->
+<div class="flex gap-6 h-48">
+<div class="info-card p-6 w-1/2 flex items-center">
+<div class="w-1/2 h-full relative">
+<canvas id="energyRecoveryChart"></canvas>
+<div class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+<span class="text-2xl font-bold text-white">25%</span>
+<span class="text-[10px] text-gray-400">Récupéré</span>
+</div>
+</div>
+<div class="w-1/2 pl-4">
+<h4 class="font-bold text-white text-sm mb-2">Énergie Cinétique</h4>
+<p class="text-xs text-gray-400 leading-relaxed">Part de l'énergie de freinage récupérée et réutilisée pour la traction en ville.</p>
+</div>
+</div>
+<div class="info-card p-6 w-1/2 flex flex-col justify-center border-l-4 border-purple-500">
+<h4 class="font-bold text-white mb-2 flex items-center"><i class="fas fa-city mr-2 text-purple-400"></i>Mode Zéro Émission</h4>
+<p class="text-sm text-gray-300 mb-2">Jusqu'à <span class="font-bold text-white">50%</span> du temps de trajet urbain effectué en mode électrique pur.</p>
+<div class="w-full bg-gray-700 h-2 rounded-full overflow-hidden mt-2">
+<div class="bg-purple-500 h-full w-1/2"></div>
+</div>
+<div class="flex justify-between text-[10px] text-gray-500 mt-1">
+<span>0%</span>
+<span>Temps de trajet</span>
+<span>100%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="absolute bottom-6 right-12 text-xs text-gray-600">
+            Source: Données moyennes constructeurs &amp; agences environnementales (ADEME)
+        </div>
+</div>
+<script>
+        // Chart Configuration
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = "'Montserrat', sans-serif";
+        
+        // Consumption Bar Chart
+        const ctxCons = document.getElementById('consumptionChart').getContext('2d');
+        new Chart(ctxCons, {
+            type: 'bar',
+            data: {
+                labels: ['Ville (Urbain)', 'Mixte', 'Autoroute'],
+                datasets: [
+                    {
+                        label: 'Thermique (Essence)',
+                        data: [8.5, 6.5, 5.8],
+                        backgroundColor: 'rgba(239, 68, 68, 0.7)',
+                        borderColor: 'rgba(239, 68, 68, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Hybride (HEV)',
+                        data: [4.2, 4.8, 5.5],
+                        backgroundColor: 'rgba(0, 208, 132, 0.8)',
+                        borderColor: 'rgba(0, 208, 132, 1)',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }, // Custom legend used in HTML
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: 'rgba(51, 65, 85, 0.5)',
+                        borderWidth: 1,
+                        padding: 10,
+                        displayColors: true
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(51, 65, 85, 0.3)',
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Litres / 100km'
+                        }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Energy Recovery Doughnut Chart
+        const ctxEnergy = document.getElementById('energyRecoveryChart').getContext('2d');
+        new Chart(ctxEnergy, {
+            type: 'doughnut',
+            data: {
+                labels: ['Récupérée', 'Perdue (Chaleur)'],
+                datasets: [{
+                    data: [25, 75],
+                    backgroundColor: [
+                        '#00d084',
+                        'rgba(51, 65, 85, 0.3)'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
